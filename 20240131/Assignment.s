@@ -53,12 +53,31 @@ main_3:
 #   i = i + 1
 main_4:
     la t0, ax       # Store pointer to ax[0] in t0
-    li t1, 0        # s = 0
-    li t2, 0        # i = 0
+    li t1, 0        # s = 0, sum
+    li t2, 0        # i = 0, iterator
     li t3, 5        # lim = 5 (size of ax)
+setup_array: # Sets the array elements
+    # ax[0] = 2
+    li t4, 2
+    sw t4, 0(t0)
+    # ax[1] = 4
+    li t4, 4
+    sw t4, 4(t0)
+    # ax[2] = 8
+    li t4, 8
+    sw t4, 8(t0)
+    # ax[3] = 16
+    li t4, 16
+    sw t4, 12(t0)
+    # ax[4] = 32
+    li t4, 32
+    sw t4, 16(t0)
 loop_start_4:
-    bge t2, t3, end_4 # if i > 5: goto end_4
-    add t1, t1, t0
+    bge t2, t3, end_4   # if i > 5: goto end_4
+    lw t4, 0(t0)        # Get value within ax[i]
+    add t1, t1, t4      # s += ax[i]
+    addi t0, t0, 4      # ax_ptr += sizeof(word)
+    addi t2, t2, 1      # i++
+    j loop_start_4      # goto loop_start_4
 end_4:
     nop # Pause here to allow for debugging
-    
