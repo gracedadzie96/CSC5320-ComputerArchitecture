@@ -1,5 +1,6 @@
 .data
-ax: .word 5
+    ax: .word 5 # uint32_t ax[5]
+    hello_world: .string "Hello World!" # char *hello_world = "Hello World!"
 
 .text
 # Problem 1: If statement
@@ -81,3 +82,18 @@ loop_start_4:
     j loop_start_4      # goto loop_start_4
 end_4:
     nop # Pause here to allow for debugging
+
+# Problem 5: Print "Hello World"
+# print("Hello World!")
+main_5:
+    addi a0, x0, 4      # Specify string to be printed
+    la a1, hello_world  # a1 = &"Hello World!"
+    ecall               # print(*a1)
+end_5:
+    nop # Pause here to allow for debugging
+
+
+terminate_program:
+    # exit(0)
+    addi a0, x0, 10
+    ecall
