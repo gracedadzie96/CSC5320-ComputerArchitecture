@@ -3,6 +3,7 @@
     hello_world: .string "Hello World!" # char *hello_world = "Hello World!"
 
 .text
+
 # Problem 1: If statement
 # int a,b,c;
 # int main(){
@@ -18,6 +19,7 @@ main_1:
 end_1:
     nop # Pause here to allow for debugging
 
+
 # Problem 2: While loop
 # i = 0
 # while i < 10
@@ -32,6 +34,7 @@ loop_start_2:
 end_2:
     nop # Pause here to allow for debugging
 
+
 # Problem 3: Summation without array
 # int a, b, c;
 # int main() {
@@ -44,6 +47,7 @@ main_3:
     add t3, t0, t1  # sum = a + b
     add t3, t2, t3  # sum += c
     nop # Pause here to allow for debugging
+
 
 # Problem 4: Summation using array
 # ax[5]
@@ -83,6 +87,7 @@ loop_start_4:
 end_4:
     nop # Pause here to allow for debugging
 
+
 # Problem 5: Print "Hello World"
 # print("Hello World!")
 main_5:
@@ -92,6 +97,45 @@ main_5:
 end_5:
     nop # Pause here to allow for debugging
 
+
+# Problem 19: Print numbers 1-10
+# for(int i = 1; i <= 10; i++)
+#   print(i)
+main_19:
+    addi t0, x0, 1      # int i = 1
+    addi t1, x1, 10     # LOOP_LIMIT = 10
+loop_start_19:
+    addi a0, x0, 1      # Print int to output
+    add a1, x0, t0      # Load int to stdout
+    ecall               # Call print
+    addi t0, t0, 1      # i++
+    ble t0, t1, loop_start_19 # if i <= LOOP_LIMIT, continue
+end_19:
+    nop # Pause here to allow for debugging
+
+
+# Problem 20: First 5 even and odd numbers.
+# for(int i = 0; i < 10; i+=2)
+#   print(i)
+# for(int i = 1; i < 10; i+=2)
+#   print(i)
+main_20:
+    addi t0, x0, 0      # int i = 0
+    addi t1, x0, 10     # LOOP_LIMIT = 10
+    addi a0, x0, 1      # Indicate integer as output
+even_loop_start_20:
+    add a1, x0, t0      # Set value to be printed
+    ecall               # Call print
+    addi t0, t0, 2      # i+=2
+    blt t0, t1, even_loop_start_20 # if i < 10, continue
+    addi t0, x0, 1      # int i = 1
+odd_loop_start_20:
+    add a1, x0, t0
+    ecall
+    addi t0, t0, 2
+    blt t0, t1, odd_loop_start_20 # if i < 10, continue
+end_20:
+    nop # Pause here to allow for debugging
 
 terminate_program:
     # exit(0)
