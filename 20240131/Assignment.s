@@ -98,6 +98,91 @@ end_5:
     nop # Pause here to allow for debugging
 
 
+# Problem 6: Reverse the string "Hello, World!"
+main_6:
+    nop
+
+
+# Problem 7: Implement subroutines
+# int twice(int x){
+#   return( x + x);
+# }
+# int main(){
+#   int a;
+#   a = twice(2);
+# }
+main_7:
+    nop
+
+
+
+# Problem 8: Solve a = b + c + d + e - f using any values
+main_8:
+    nop
+
+
+# Problem 9: Swap the values of two variables
+main_9:
+    nop
+
+
+# Problem 10: Calculate 10! (factorial)
+main_10:
+    nop
+
+
+# Problem 11: Find largest of 3 numbers.
+main_11:
+    nop
+
+
+# Problem 12: Find the smallest of 3 numbers.
+main_12:
+    nop
+
+
+# Problem 13: Install RISCV extension and run a program.
+main_13:
+    nop
+
+
+# Problem 14: Perform binary search on the array 1, 4, 8, 10, 24
+main_14:
+    nop
+
+# Problem 15: Describe registers x0-x31
+main_15:
+    nop
+
+
+# Problem 16: Describe each section in RISC-V and write a program that uses them
+main_16:
+    nop
+
+
+# Problem 17: Program that uses `ecall`
+main_17:
+    addi a0, x0, 1      # Specify printing int
+    addi a1, x0, 100    # Load 100 into stdout buffer
+    ecall               # print(100)
+end_17:
+    nop # Pause here to allow for debugging
+
+# Problem 18: Perform AND, OR, and XOR
+#
+main_18:
+    addi t0, x0, 512  # a = 512
+    addi t1, x0, 1024 # b = 1024
+and_18:
+    and t2, t0, t1          # c = a & b
+or_18:
+    or t3, t0, t1           # d = a | b
+xor_18:
+    xor t4, t0, t1          # e = a ^ b
+end_18:
+    nop # Pause here to allow for debugging
+
+
 # Problem 19: Print numbers 1-10
 # for(int i = 1; i <= 10; i++)
 #   print(i)
