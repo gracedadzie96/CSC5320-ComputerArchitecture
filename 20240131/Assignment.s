@@ -61,7 +61,7 @@ main_4:
     li t1, 0        # s = 0, sum
     li t2, 0        # i = 0, iterator
     li t3, 5        # lim = 5 (size of ax)
-setup_array: # Sets the array elements
+setup_array_4: # Sets the array elements
     # ax[0] = 2
     li t4, 2
     sw t4, 0(t0)
@@ -147,16 +147,97 @@ main_13:
 
 
 # Problem 14: Perform binary search on the array 1, 4, 8, 10, 24
+# TODO: Finish this
+# t0 = &ax
+# t1 = low = 0
+# t2 = high = len(ax)
+# t3 = mid = (high + low) / 2
+# t4 = ax_offset = &ax + 4(mid)
+# t5 = value = ?
+# t6 = ax[n]
 main_14:
+    la t0, ax       # Store pointer to ax[0] in t0
+    addi t1, x0, 0  # low = 0
+    addi t2, x0, 5  # high = size_of(ax)
+    addi t5, x0, 10 # value = 10
+setup_array_14:
+    # ax[0] = 2
+    addi t4, x0, 2
+    sw t4, 0(t0)
+    # ax[1] = 4
+    addi t4, x0, 4
+    sw t4, 4(t0)
+    # ax[2] = 8
+    addi t4, x0, 8
+    sw t4, 8(t0)
+    # ax[3] = 10
+    addi t4, x0, 10
+    sw t4, 12(t0)
+    # ax[4] = 24
+    addi t4, x0, 24
+    sw t4, 16(t0)
+binary_search:
+    # mid = (high + low) / 2
+    add t3, t1, t2 # high + low
+    srli t3, t3, 1 # Div sum by two
+    slli t3, t3, 2 # Mult by four
+    # NOTE: Have to first div by 2 then multiply by 4 because need to truncate
+    # any decimal value before getting the offset as the word size.
+    add t4, t0, t3 # ax_offset = &ax + 4(mid)
+    lw t6, 0(t4)
+    bgt t6, t5, element_gt # if ax[n] > value: goto element_gt
+    blt t6, t5, element_lt # if ax[n] < value: goto element lt
+    j end_14
+element_gt: # ax[n] > value
+    j end_14
+element_lt: # ax[n] < value
+    j end_14
+end_14:
     nop
 
 # Problem 15: Describe registers x0-x31
 main_15:
+    #  x0: zero; Constant 0
+    #  x1: ra; Return address
+    #  x2: sp; Stack pointer
+    #  x3: gp; Global pointer
+    #  x4: tp; Thread pointer
+    #  x5: t0; Temporary register
+    #  x6: t1; Temporary register
+    #  x7: t2; Temporary register
+    #  x8: s0; Saved register, frame pointer
+    #  x9: s1; Saved register
+    # x10: a0; Function argument, return value 0
+    # x11: a1; Function argument, return value 1
+    # x12: a2; Function argument
+    # x13: a3; Function argument
+    # x14: a4; Function argument
+    # x15: a5; Function argument
+    # x16: a6; Function argument
+    # x17: a7; Function argument
+    # x18: s2; Saved register
+    # x19: s3; Saved register
+    # x20: s4; Saved register
+    # x21: s5; Saved register
+    # x22: s6; Saved register
+    # x23: s7; Saved register
+    # x24: s8; Saved register
+    # x25: s9; Saved register
+    # x26: s10; Saved register
+    # x27: s11; Saved register
+    # x28: t3; Temporary register
+    # x29: t4; Temporary register
+    # x30: t5; Temporary register
+    # x31: t6; Temporary register
+end_15:
     nop
 
 
 # Problem 16: Describe each section in RISC-V and write a program that uses them
 main_16:
+# .data The data section containing global program variables
+# .text The code portion of the program containing instructions
+end_16:
     nop
 
 
