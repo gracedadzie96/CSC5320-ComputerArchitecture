@@ -133,12 +133,34 @@ main_10:
 
 # Problem 11: Find largest of 3 numbers.
 main_11:
-    nop
+    # Setup numbers for program
+    addi t0, x0, 9  # a = 9
+    addi t1, x0, 4  # b = 4
+    addi t2, x0, 6  # c = 6
+    add t4, x0, t0  # smallest_found = a = 9
+    bgt t4, t1, agtb # if(a > b), goto agtb
+    add t4, x0, t1  # else smallest_found = b
+agtb:
+    bgt t4, t2, bgtc # if(smallest_found > c), goto bgtc
+    add t4, x0, t2  # else smallest_found = c
+bgtc:
+    nop # t4 has the largest value found in the given set
 
 
 # Problem 12: Find the smallest of 3 numbers.
 main_12:
-    nop
+    # Setup numbers for program
+    addi t0, x0, 9  # a = 9
+    addi t1, x0, 4  # b = 4
+    addi t2, x0, 6  # c = 6
+    add t4, x0, t0  # smallest_found = a = 9
+    blt t4, t1, altb # if(a < b), goto altb
+    add t4, x0, t1  # else smallest_found = b
+altb:
+    blt t4, t2, bltc # if(smallest_found < c), goto bltc
+    add t4, x0, t2  # else smallest_found = c
+bltc:
+    nop # t4 has the smallest value found in the given set
 
 
 # Problem 13: Install RISCV extension and run a program.
