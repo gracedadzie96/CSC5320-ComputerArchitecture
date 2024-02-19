@@ -143,6 +143,7 @@ main_12:
 
 # Problem 13: Install RISCV extension and run a program.
 main_13:
+    # Required to get the assignment to work.
     nop
 
 
@@ -177,21 +178,26 @@ setup_array_14:
     addi t4, x0, 24
     sw t4, 16(t0)
 binary_search:
-    # mid = (high + low) / 2
-    add t3, t1, t2 # high + low
-    srli t3, t3, 1 # Div sum by two
-    slli t3, t3, 2 # Mult by four
-    # NOTE: Have to first div by 2 then multiply by 4 because need to truncate
-    # any decimal value before getting the offset as the word size.
-    add t4, t0, t3 # ax_offset = &ax + 4(mid)
-    lw t6, 0(t4)
-    bgt t6, t5, element_gt # if ax[n] > value: goto element_gt
-    blt t6, t5, element_lt # if ax[n] < value: goto element lt
+    # mid = low + (high - low) / 2
+    sub t3, t2, t1 # temp0 = high - low
+    srli t3, t3, 1 # temp1 = temp0 / 2div
+    add t3, t3, t1 # mid = low + temp1
+    # Turn mid into an offset of ax[0]
+    slli t3, t3, 2
+    add t6, t0, t3 # Gets &ax[mid]
+    lw t4, 0(t6)
+    # if(ax[mid] > value)
+    bgt t4, t5, axm_gt
+    # if(ax[mid] < value)
+    blt t4, t5, axm_lt
+    # if(ax[mid] == value)
     j end_14
-element_gt: # ax[n] > value
-    j end_14
-element_lt: # ax[n] < value
-    j end_14
+axm_gt:
+    addi t1, t3, 1
+    j binary_search
+axm_lt:
+    addi t2, t3, -1
+    j binary_search
 end_14:
     nop
 
