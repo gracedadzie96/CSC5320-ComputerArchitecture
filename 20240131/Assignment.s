@@ -123,11 +123,24 @@ main_8:
 
 # Problem 9: Swap the values of two variables
 main_9:
+    addi t0, x0, 5 # a = 5
+    addi t1, x0, 6 # b = 6
+    add t2, x0, t0 # temp = a
+    add t0, x0, t1 # a = b
+    add t1, x0, t2 # b = temp
     nop
 
 
 # Problem 10: Calculate 10! (factorial)
 main_10:
+    addi t0, x0, 10 # mult = 10
+    addi t1, x0, 1  # factorial = 1
+factorial_loop:
+    ble t0, x0, end_10
+    mul t1, t1, t0
+    addi t0, t0, -1
+    j factorial_loop
+end_10:
     nop
 
 
