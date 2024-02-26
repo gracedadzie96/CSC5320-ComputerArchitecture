@@ -136,10 +136,10 @@ main_10:
     addi t0, x0, 10 # mult = 10
     addi t1, x0, 1  # factorial = 1
 factorial_loop:
-    ble t0, x0, end_10
-    mul t1, t1, t0
-    addi t0, t0, -1
-    j factorial_loop
+    ble t0, x0, end_10 # if mult <= 0, goto: end_10
+    mul t1, t1, t0     # factorial *= mult
+    addi t0, t0, -1    # mult--
+    j factorial_loop   # goto: factorial_loop
 end_10:
     nop
 
