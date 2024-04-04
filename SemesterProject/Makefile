@@ -2,7 +2,17 @@
 all: singlethread multithread
 
 singlethread: singlethread.c
-	gcc -Wall singlethread.c -o singlethread
+	gcc -Wall -pg singlethread.c -o singlethread
 
 multithread: multithread.c
-	gcc -Wall multithread.c -o multithread
+	gcc -Wall -pg multithread.c -o multithread
+
+.PHONY: clean
+clean:
+	rm singlethread multithread
+
+# Probably will need "sudo" access for this
+.PHONY: benchmark
+benchmark:
+	perf stat -d ./singlethread
+	perf stat -d ./multithread
