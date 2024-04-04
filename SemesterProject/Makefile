@@ -5,7 +5,7 @@ singlethread: singlethread.c
 	gcc -Wall -pg singlethread.c -o singlethread
 
 multithread: multithread.c
-	gcc -Wall -pg multithread.c -o multithread
+	gcc -Wall -pg multithread.c -o multithread -lpthread
 
 .PHONY: clean
 clean:

@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-#define A_ROWS 2
-#define A_COLS 4
-#define B_ROWS 4
-#define B_COLS 2
+#define A_ROWS 1000
+#define A_COLS 1000
+#define B_ROWS A_COLS
+#define B_COLS A_ROWS
 
 int main(int argc, char** argv)
 {
@@ -26,45 +26,35 @@ int main(int argc, char** argv)
     }
 
     // Init matrix A
-    //printf("\nMATRIX A:");
     for(unsigned int i = 0; i < A_ROWS; i++)
     {
         //printf("\n");
         for(unsigned int j = 0; j < A_COLS; j++)
         {
             matrix_a[i][j] = (i+j);
-            //printf("%2d ", matrix_a[i][j]);
         }
     }
 
     // Init matrix B
-    //printf("\nMATRIX B:");
     for(unsigned int i = 0; i < B_ROWS; i++)
     {
-        //printf("\n");
         for(unsigned int j = 0; j < B_COLS; j++)
         {
             matrix_b[i][j] = (i-j);
-            //printf("%2d ", matrix_b[i][j]);
         }
     }
 
     // Multiply [A] * [B]
-    //printf("\nRESULT:");
     for(unsigned int i = 0; i < A_ROWS; i++)
     {
-        //printf("\n");
         for(unsigned int j = 0; j < B_COLS; j++)
         {
             for(unsigned int k = 0; k < B_ROWS; k++)
             {
                 matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];
             }
-            //printf("%2d ", matrix_r[i][j]);
         }
     }
 
-    //printf("\n");
-    fflush(stdout);
     return 0;
 }
