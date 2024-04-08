@@ -5,7 +5,7 @@
 #define A_ROWS 1000
 #define A_COLS 1000
 #define B_ROWS A_COLS
-#define B_COLS A_ROWS
+#define B_COLS 500
 
 // Matrices used as part of the multiplication operation
 int matrix_a[A_ROWS][A_COLS],
@@ -57,14 +57,11 @@ int main(int argc, char** argv)
 void init_matrix_a()
 {
     // Init matrix A
-    //printf("\nMATRIX A:");
     for(unsigned int i = 0; i < A_ROWS; i++)
     {
-        //printf("\n");
         for(unsigned int j = 0; j < A_COLS; j++)
         {
             matrix_a[i][j] = (i+j);
-            //printf("%2d ", matrix_a[i][j]);
         }
     }
 }
@@ -72,28 +69,22 @@ void init_matrix_a()
 void init_matrix_b()
 {
     // Init matrix B
-    //printf("\nMATRIX B:");
     for(unsigned int i = 0; i < B_ROWS; i++)
     {
-        //printf("\n");
         for(unsigned int j = 0; j < B_COLS; j++)
         {
             matrix_b[i][j] = (i+j);
-            //printf("%2d ", matrix_b[i][j]);
         }
     }
 }
 
 void mult_matrix_instance(unsigned int * i)
 {
-    pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;
     for(unsigned int j = 0; j < B_COLS; j++)
     {
         for(unsigned int k = 0; k < B_ROWS; k++)
         {
-            pthread_mutex_lock(&mtx);
             matrix_r[*i][j] += matrix_a[*i][k] * matrix_b[k][j];
-            pthread_mutex_unlock(&mtx);
         }
     }
     free(i); // Free the iterator

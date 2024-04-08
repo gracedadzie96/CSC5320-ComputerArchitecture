@@ -3,14 +3,10 @@
 #define A_ROWS 1000
 #define A_COLS 1000
 #define B_ROWS A_COLS
-#define B_COLS A_ROWS
+#define B_COLS 500
 
 int main(int argc, char** argv)
 {
-    // User goofed with matrix dimensions, stop execution
-    if(A_COLS != B_ROWS)
-        return 1;
-
     // Matrices used as part of the multiplication operation
     int matrix_a[A_ROWS][A_COLS],
         matrix_b[B_ROWS][B_COLS],
@@ -28,7 +24,6 @@ int main(int argc, char** argv)
     // Init matrix A
     for(unsigned int i = 0; i < A_ROWS; i++)
     {
-        //printf("\n");
         for(unsigned int j = 0; j < A_COLS; j++)
         {
             matrix_a[i][j] = (i+j);
